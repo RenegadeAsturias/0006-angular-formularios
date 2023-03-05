@@ -1,0 +1,35 @@
+<div class="container">
+	<section class="section">
+		<h1 class="title">Contact</h1>
+		<div class="column is-full">
+			<form [formGroup]="formulario" (ngSubmit)="onSubmit(formulario)" novalidate>
+				<div class="control" [ngStyle]="{'padding-bottom':'12px','color':'blue'}">
+					<label class="label">Username</label>&nbsp;
+					<input formControlName="name"/>
+                    <div [ngClass]="{'error':true}" 
+                         [ngStyle]="{'paddig-top':'10px','padding-bottom':'10px'}"
+                         *ngIf="formulario.controls['name'].hasError('required')">
+                        Campo obligatorio
+                    </div>
+                    <div [ngClass]="{'error':true}" 
+                         [ngStyle]="{'paddig-top':'10px','padding-bottom':'10px'}"
+                         *ngIf="formulario.controls['name'].hasError('maxlength')">
+                        Menor de 8 caracteres.
+                    </div>
+				</div>
+				<div class="control" [ngStyle]="{'padding-bottom':'12px','color':'blue'}">
+					<label class="label">Email</label>&nbsp;
+					<input formControlName="email"/>
+				</div>
+                <br/><input type="submit" [disabled]="!formulario.valid"/>
+            </form>
+		</div>
+	</section>
+	<section>
+        <br/>
+        <p>Datos formuario: {{formulario.value | json}}</p>
+        <p>Validación formulario: {{formulario.valid}}</p>
+        <p>Errores formulario reactivos: {{ formulario.controls['name'].errors | json }}</p>
+    </section>
+</div>
+
